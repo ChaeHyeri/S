@@ -2,6 +2,7 @@ package cat.Controller;
 
 import cat.dao.UserDAO;
 import cat.dto.User;
+import cat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 @Controller
 public class LoginController {
     @Autowired
-    UserDAO userDao;
+    UserService userService;
 
     @RequestMapping("/loginpage")
     public String loginpage() {
@@ -60,9 +61,10 @@ public class LoginController {
                 response.addCookie(cookie);
             }
 
-
         toURL = toURL==null || toURL.equals("") ? "/" : toURL;
         return "redirect:"+toURL;
+
+
 
     }
 
@@ -71,11 +73,11 @@ public class LoginController {
     private boolean loginCheck(String id, String pwd) throws Exception {
 
 
-        User user = userDao.selectUser(id);
+        User user = userService.read(id);
+        System.out.println("user = " + user);
 
         if(user==null) return false;
 
-        System.out.println("nnn = " + user);
         return user.getPwd().equals(pwd);
     }
 }

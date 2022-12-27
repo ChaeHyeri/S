@@ -3,6 +3,7 @@ package cat.Controller;
 
 import cat.dao.UserDAO;
 import cat.dto.User;
+import cat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -23,7 +26,7 @@ import java.util.Date;
 @Controller
 public class RegisterController {
     @Autowired
-    UserDAO userDao;
+    UserService userService;
 
     final int FAIL = 0;
 
@@ -44,15 +47,17 @@ public class RegisterController {
     }
 
     @PostMapping("/register/save")
-    public String save(@Valid User user, BindingResult result, Model m) throws Exception {
+    public String save(@Valid User user, BindingResult result, Model m, HttpServletRequest request) throws Exception {
         System.out.println("result="+result);
         System.out.println("user="+user);
 
-        // User객체를 검증한 결과 에러가 있으면, registerForm을 이용해서 에러를 보여줘야 함.
+        // 1. 에러가 없으면
         if(!result.hasErrors()) {
-            // 2. DB에 신규회원 정보를 저장
+            // 2. DB에 신규회원 정보를 저장 + 세션에 저장
 
-            int rowCnt = userDao.insertUser(user);
+            int rowCnt = userService.register(user);
+            HttpSession session = request.getSession();
+            session.setAttribute("id",user.getId());
 
             if(rowCnt!=FAIL) {
                 return "registerInfo";

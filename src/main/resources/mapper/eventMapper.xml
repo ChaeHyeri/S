@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cat.dao.EventMapper">
+
+
+    <insert id="insert" parameterType="map">
+        INSERT INTO event
+            (writer, commenter, bno, comment)
+        VALUES
+            (#{writer},#{commenter}, #{bno}, #{comment})
+    </insert>
+
+    <select id="getEvtList" resultType="NewCommentEvent">
+            SELECT writer, commenter, bno, comment
+            FROM event
+            WHERE writer = #{writer} AND  commenter != #{writer}
+    </select>
+
+</mapper>

@@ -6,5 +6,9 @@
     <typeAliases>
         <typeAlias alias="User" type="cat.dto.User"/>
         <typeAlias alias="BoardDTO" type="cat.dto.BoardDTO"/>
+        <typeAlias alias="SearchCondition" type="cat.dto.SearchCondition"/>
+        <typeAlias alias="CommentDTO" type="cat.dto.CommentDTO"/>
+        <typeAlias alias="EventDto" type="cat.dto.ReplyEventDto"/>
+        <typeAlias alias="NewCommentEvent" type="cat.event.NewCommentEvent"/>
     </typeAliases>
 </configuration>

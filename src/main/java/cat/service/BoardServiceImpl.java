@@ -2,6 +2,7 @@ package cat.service;
 
 import cat.dao.BoardDAO;
 import cat.dto.BoardDTO;
+import cat.dto.SearchCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,13 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public int remove(Integer board_num, String board_writer) throws Exception {
-        return boardDao.delete(board_num, board_writer);
+    public int viewCount(Integer bno) throws Exception {
+        return boardDao.increaseViewCnt(bno);
+    }
+
+    @Override
+    public int remove(Integer bno, String writer) throws Exception {
+        return boardDao.delete(bno, writer);
     }
 
     @Override
@@ -35,11 +41,10 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardDTO read(Integer board_num) throws Exception {
-        BoardDTO boardDto = boardDao.select(board_num);
-//        boardDao.increaseViewCnt(board_num);
+    public BoardDTO read(Integer bno) throws Exception {
+        //        boardDao.increaseViewCnt(board_num);
 
-        return boardDto;
+        return boardDao.select(bno);
     }
 
     @Override
@@ -51,6 +56,18 @@ public class BoardServiceImpl implements BoardService {
     public int modify(BoardDTO boardDto) throws Exception {
         return boardDao.update(boardDto);
     }
+
+    @Override
+    public List<BoardDTO> getSearchResultPage(SearchCondition sc) throws Exception {
+        return boardDao.searchSelectPage(sc);
+    }
+
+    @Override
+    public int getSearchResultCnt(SearchCondition sc) throws Exception {
+        return boardDao.searchResultCnt(sc);
+    }
+
+
 
 
 }
