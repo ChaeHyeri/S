@@ -22,7 +22,7 @@
         INSERT INTO comment
             (bno, pcno, comment, commenter, reg_date, up_date)
         VALUES
-            (#{bno}, #{pcno}, #{comment}, #{commenter}, now(), now())
+            (#{bno}, ifnull(#{pcno},#{cno}), #{comment}, #{commenter}, now(), now())
     </insert>
 
 

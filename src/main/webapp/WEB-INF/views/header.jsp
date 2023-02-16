@@ -93,8 +93,9 @@
         <nav>
             <ul class="main-nav">
                 <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
-                <li><a href="<c:url value='/'/>">Shop</a></li>
-                <li><a href="<c:url value='/board'/>">Post</a></li>
+                <li><a href="<c:url value='/'/>">shop</a></li>
+                <li><a href="<c:url value='/board'/>">post</a></li>
+                <li><a href="<c:url value='/me'/>">my</a></li>
             </ul>
         </nav>
         <ul class="main-nav">
@@ -104,7 +105,8 @@
         </ul>
     </header>
 
-<script>  // 알림내역
+<script>
+    /* 댓글 알림내역 */
     let showAlarmList = function() {
         $.ajax({
             type:'GET',       // 요청 메서드

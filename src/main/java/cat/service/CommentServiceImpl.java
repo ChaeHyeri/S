@@ -50,14 +50,16 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int write(CommentDTO commentDto) throws Exception {
-        boardDao.updateCommentCnt(commentDto.getBno(), 1);
 
+        boardDao.updateCommentCnt(commentDto.getBno(), 1);
         String writer = boardDao.select(commentDto.getBno()).getWriter();
         eventDAO.saveNewCommentAlarm(writer,commentDto);
 
         publisher.publishEvent(new NewCommentEvent(commentDto.getBno()));
 
+
         return commentDao.insert(commentDto);
+
     }
 
     @Override

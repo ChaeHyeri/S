@@ -36,6 +36,7 @@ public class CommentDAOImpl implements CommentDAO {
     @Override
     public int insert(CommentDTO dto) throws Exception {
         System.out.println(" comment insert");
+        System.out.println("Comment dto = " + dto);
         return session.insert(namespace+"insert", dto);
     } // int insert(String statement, Object parameter)
 
@@ -58,4 +59,5 @@ public class CommentDAOImpl implements CommentDAO {
     public int update(CommentDTO dto) throws Exception {
         return session.update(namespace+"update", dto);
     } // int update(String statement, Object parameter)
+
 }

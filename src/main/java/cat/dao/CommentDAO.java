@@ -25,4 +25,5 @@ public interface CommentDAO {
 
     int update(CommentDTO dto) throws Exception // int update(String statement, Object parameter)
     ;
+
 }

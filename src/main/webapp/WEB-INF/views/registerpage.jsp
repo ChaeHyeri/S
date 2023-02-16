@@ -95,13 +95,13 @@
     <label for="">아이디</label>
     <input class="input-field" type="text" name="id" placeholder="8~12자리의 영대소문자와 숫자 조합">
     <label for="">비밀번호</label>
-    <input class="input-field" type="text" name="pwd" placeholder="8~12자리의 영대소문자와 숫자 조합">
+    <input class="input-field" type="password" name="pwd" placeholder="8~12자리의 영대소문자와 숫자 조합">
     <label for="">이름</label>
     <input class="input-field" type="text" name="name" placeholder="홍길동">
     <label for="">이메일</label>
     <input class="input-field" type="text" name="email" placeholder="example@fastcampus.co.kr">
     <label for="">생일</label>
-    <input class="input-field" type="text" name="birth" placeholder="2020-12-31">
+    <input class="input-field" type="date" name="birth" placeholder="2020-12-31">
 
     <div class="sns-chk">
         <label><input type="checkbox" name="sns" value="facebook"/>페이스북</label>

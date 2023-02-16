@@ -6,7 +6,6 @@ let toHtml = function(comments){
         tmp += ' data-bno=' + comment.bno + '>'
         if(comment.cno!=comment.pcno)
             tmp += 'ㄴ'
-        // 추후 해당 부분만 가져오기 쉽도록 span함.
         tmp += ' <span class="commenter">' + comment.commenter + '</span> '
         tmp += '<br>'
         tmp += ' <span class="comment">' + comment.comment + '</span> '
@@ -73,8 +72,7 @@ $("#sendBtn").click(function () {
             alert(result);
             showList(bno);
 
-            console.debug("reply.js::socket>>",socket)
-            // 소켓이 연결된 상태에만 알림을 보냄
+            /* 소켓이 연결된 상태에만 알림을 보냄 */
             if(socket) { // (reply,글번호)
 
                 let socketMsg = "reply"+","+bno+","+writer;

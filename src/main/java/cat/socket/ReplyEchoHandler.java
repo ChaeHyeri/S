@@ -1,7 +1,9 @@
 package cat.socket;
 
 import cat.dto.User;
+import cat.service.BoardService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -15,6 +17,7 @@ import java.util.Map;
 
 
 public class ReplyEchoHandler extends TextWebSocketHandler {
+
     // 전체 접속자의 session 을 담는 리스트
     List<WebSocketSession> sessions = new ArrayList<>();
 
@@ -60,9 +63,9 @@ public class ReplyEchoHandler extends TextWebSocketHandler {
                 // 새 댓글 알림 전송
                 WebSocketSession boardWriterSession = userSessions.get(boardWriter);
                 System.out.println("boardWriterSession = " + boardWriterSession);
-                if("reply".equals(cmd) && boardWriterSession != null){
 
-                    System.out.println(" ok");
+                /* 게시글 작성자 == 댓글 작성자인 경우에는 알림X */
+                if("reply".equals(cmd) && boardWriterSession != null && !senderId.equals(boardWriter)) {
                     TextMessage tmpMsg = new TextMessage("<a href='/board/read?bno=" + bno + "'>" + bno + "</a>번 게시글에 새로운 댓글이 있습니다.");
                     boardWriterSession.sendMessage(tmpMsg);
                 }
@@ -80,8 +83,6 @@ public class ReplyEchoHandler extends TextWebSocketHandler {
             return session.getId();
         else
             return loginUser;
-
-
     }
 
 

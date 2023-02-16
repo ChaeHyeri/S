@@ -11,10 +11,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class NewCommentEventListener {
 
-
-
-
-
     // 새 댓글 알림
     @EventListener
     @Async  // 비동기로 자동 수행 애너테이션
