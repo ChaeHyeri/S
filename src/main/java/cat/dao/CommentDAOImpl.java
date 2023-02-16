@@ -40,8 +40,13 @@ public class CommentDAOImpl implements CommentDAO {
     } // int insert(String statement, Object parameter)
 
     @Override
-    public List<CommentDTO> selectAll(Integer bno) throws Exception {
-        return session.selectList(namespace+"selectAll", bno);
+    public List<CommentDTO> selectAll(Integer bno, int offset) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        System.out.println("offset = " + offset);
+        map.put("bno", bno);
+        map.put("offset", offset);
+        map.put("limit", 10);
+        return session.selectList(namespace+"selectAll", map);
     } // List<E> selectList(String statement)
 
     @Override

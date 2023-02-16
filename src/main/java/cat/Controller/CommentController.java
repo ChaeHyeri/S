@@ -1,6 +1,8 @@
 package cat.Controller;
 
 import cat.dto.CommentDTO;
+import cat.dto.PageHandler;
+import cat.dto.SearchCondition;
 import cat.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //@Controller
 //@ResponseBody
@@ -80,17 +84,28 @@ public class CommentController {
 
     // 지정된 게시물의 모든 댓글을 가져오는 메서드
     @GetMapping("/comments")  // /comments?bno=1080   GET
-    public ResponseEntity<List<CommentDTO>> list(Integer bno) {
+    public ResponseEntity<Map<String, Object>> list(Integer bno, Integer page, SearchCondition sc) throws Exception {
+        System.out.println("bno = " + bno);
+        System.out.println("page = " + page);
         List<CommentDTO> list = null;
+        Map<String, Object> map = new HashMap<>();
         try {
-            list = service.getList(bno);
+            list = service.getList(bno, page);
             System.out.println("list = " + list);
-            return new ResponseEntity<List<CommentDTO>>(list, HttpStatus.OK);  // 200
+
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<List<CommentDTO>>(HttpStatus.BAD_REQUEST); // 400
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST); // 400
         }
+        int replyCnt = service.getCount(bno);
+        System.out.println("replyCnt = " + replyCnt);
+        PageHandler pageHandler = new PageHandler(replyCnt,sc);
+        System.out.println("pageHandler = " + pageHandler);
+
+        map.put("list", list);
+        map.put("ph", pageHandler);
+
+
+        return new ResponseEntity<>(map, HttpStatus.OK);  // 200
     }
-
-
 }

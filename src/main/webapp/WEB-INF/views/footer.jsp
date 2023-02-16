@@ -12,41 +12,42 @@
 </footer>
 
 <script>
-    let socket = null; // 어느 페이지에서든 알림을 보낼 수 있도록 전역변수로 선언
+    /* 어느 페이지에서든 알림을 보낼 수 있도록 전역변수로 선언 */
+    let socket = null;
     $(document).ready(function () {
         connectWS();
 
     });
 
     function connectWS() {
-        console.log("mm")
-        // servlet-context.xml
+
+         // servlet-context.xml
         var ws = new WebSocket("ws://localhost:8080" + "/replyEcho?bno=1234");
         socket = ws;
 
-        // 소켓 연결 시
+        /* 소켓 연결 시 */
         ws.onopen = function () {
-            console.log('Info: connection opened.');
+            console.log("==== socket connect. ====");
         };
 
         ws.onmessage = function (event) {
-            console.log("Handler로부터 받은 메세지 : ", event.data + '\n');
+            console.log("Handler 로부터 받은 메세지 : ", event.data + '\n');
 
-            // 실시간 알림창(6초동안 팝업)
+            /* 실시간 알림창 (10초동안 팝업되었다 사라짐) */
             let $alarm = $('div#alarm');
             $alarm.html(event.data);
             $alarm.css('display','block');
+
             setTimeout(function () {
                $alarm.css('display','none');
-            },6000);
+            },1000*10);
         };
 
         ws.onclose = function (event) {
-            console.log('Info: connection closed.');
-            // setTimeout(function () { connect(); }, 1000); // retry connection!!
+            console.log('==== connection closed. ====');
         };
         ws.onerror = function (err) {
-            console.log('Info: connection error.');
+            console.log('==== connect failed. ====');
         };
     }
 

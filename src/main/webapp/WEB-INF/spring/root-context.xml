@@ -14,8 +14,8 @@
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/springbasic?useUnicode=true&amp;characterEncoding=utf8"></property>
-		<property name="username" value="hyeri"></property>
-		<property name="password" value="1234"></property>
+		<property name="username" value="hyeri1019"></property>
+		<property name="password" value="Hyeri1019^^"></property>
 	</bean>
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>

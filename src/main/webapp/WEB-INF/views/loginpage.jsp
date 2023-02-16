@@ -73,7 +73,6 @@
 </head>
 <body>
 
-
 <div id="home" class="big-bg">
     <header class="page-header wrapper">
         <h1><a href="<c:url value='/'/>"><img class="logo" src="images/logo.png" alt="냥냥닷컴 홈"></a></h1>

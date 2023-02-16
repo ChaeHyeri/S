@@ -9,7 +9,8 @@
     </delete>
 
     <select id="count" parameterType="int" resultType="int">
-        SELECT count(*) FROM comment
+        SELECT count(*)
+        FROM comment
         WHERE  bno = #{bno}
     </select>
 
@@ -24,11 +25,13 @@
             (#{bno}, #{pcno}, #{comment}, #{commenter}, now(), now())
     </insert>
 
-    <select id="selectAll" parameterType="int" resultType="CommentDto">
+
+    <select id="selectAll" parameterType="map" resultType="CommentDto">
         SELECT cno, bno, ifnull(pcno, cno) as pcno, comment, commenter, reg_date, up_date
         FROM comment
         WHERE bno = #{bno}
-        ORDER BY pcno asc, cno asc;
+        ORDER BY pcno asc, cno asc
+        LIMIT #{offset}, #{limit}
     </select>
 
     <select id="select" parameterType="int" resultType="CommentDto">

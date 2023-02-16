@@ -16,7 +16,7 @@ public interface CommentService {
     @Transactional(rollbackFor = Exception.class)
     int write(CommentDTO commentDto) throws Exception;
 
-    List<CommentDTO> getList(Integer bno) throws Exception;
+    List<CommentDTO> getList(Integer bno, Integer page) throws Exception;
 
     CommentDTO read(Integer cno) throws Exception;
 

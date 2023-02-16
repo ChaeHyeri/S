@@ -39,7 +39,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Transactional(rollbackFor = Exception.class) // 예외발생 시 rollback
     public int remove(Integer cno, Integer bno, String commenter) throws Exception {
-        // 댓글을 삭제하면 댓글수 -1 처리 및 해당 댓글을 삭제(트랜젝션)
+        /* 댓글 삭제 시 count -1 && delete */
         int rowCnt = boardDao.updateCommentCnt(bno, -1);
         System.out.println("updateCommentCnt - rowCnt = " + rowCnt);
         rowCnt = commentDao.delete(cno, commenter);
@@ -61,9 +61,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDTO> getList(Integer bno) throws Exception {
-//        throw new Exception("test");
-        return commentDao.selectAll(bno);
+    public List<CommentDTO> getList(Integer bno, Integer page) throws Exception {
+        /* 한 페이지당 10개의 댓글을 출력하도록 설정 */
+        int offset = (page - 1) * 10;
+        return commentDao.selectAll(bno, offset);
     }
 
     @Override

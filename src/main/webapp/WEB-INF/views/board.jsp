@@ -48,6 +48,14 @@
             color: #c5c5c5;
         }
 
+        #paging {
+            text-align: center;
+        }
+
+        #paging button {
+            color: blue;
+            margin-right: 10px;
+        }
         .update {
             color: rgba(197,197,197,0.5);
         }
@@ -64,6 +72,7 @@
         #commentWrite {
             text-align:center;
             margin: 70px 0px 10px 0px;
+
         }
 
         #commentWrite > input {
@@ -122,6 +131,7 @@
     </div>
 
     <div id="commentList"></div> <!-- 댓글내용 불러옴-->
+    <div id="paging"></div>
 
     <%--답글form은 숨겨놨다가, "답글"버튼을 클릭하면 해당 댓글 바로 아래로 이동하도록 한다.--%>
     <div id="replyForm" style="display:none">
@@ -132,21 +142,37 @@
     <script>
         let bno = ${boardDto.bno};
         let writer = "${boardDto.writer}";
-        let showList = function(bno) {
+
+        let showList = function(bno,page) {
+
             $.ajax({
                 type:'GET',       // 요청 메서드
-                url: '/comments?bno='+bno,  // 요청 URI
+                url: '/comments',  // 요청 URI
+                data: {
+                    bno: bno,
+                    page: page
+                },
                 headers : { "content-type": "application/json"}, // 요청 헤더
                 success : function(result){
-                    // $("#commentList").html(result);
-                    $("#commentList").html(toHtml(result));
-                },
-                error   : function(){ alert("error") } // 에러가 발생했을 때, 호출될 함수
+                    let list = result.list
+                    let paging = result.ph;
+                    console.log(paging);
+
+                    let pageButton = '';
+                    for (let i = paging.beginPage; i <= paging.endPage; i++) {
+                        page = i;
+                        pageButton += '<button onclick="showList(' + bno + ', ' + i + ')">' + i + '</button>';
+                    }
+
+                    $("#commentList").html(toHtml(list));
+                    $("#paging").html(pageButton);
+                }
             }); // $.ajax()
         }
 
+
         $(document).ready(function(){
-            showList(bno);
+            showList(bno,1);
 
             $('#btnSend').on('click', function(evt) {
                 evt.preventDefault();

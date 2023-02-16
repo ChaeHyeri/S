@@ -17,7 +17,7 @@ public interface CommentDAO {
     int insert(CommentDTO dto) throws Exception // int insert(String statement, Object parameter)
     ;
 
-    List<CommentDTO> selectAll(Integer bno) throws Exception // List<E> selectList(String statement)
+    List<CommentDTO> selectAll(Integer bno, int offset) throws Exception // List<E> selectList(String statement)
     ;
 
     CommentDTO select(Integer cno) throws Exception // T selectOne(String statement, Object parameter)
