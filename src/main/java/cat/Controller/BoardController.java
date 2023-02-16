@@ -126,7 +126,7 @@ public class BoardController {
     public String list(SearchCondition sc, Integer page, Integer pageSize, Model m, HttpServletRequest request) {
 
         if(loginCheck(request))
-            return "redirect:/loginpage?toURL="+request.getRequestURL();  // 로그인을 안했으면 로그인 화면으로 이동
+            return "redirect:/login?toURL="+request.getRequestURL();  // 로그인을 안했으면 로그인 화면으로 이동
         //
         if(page==null) page=1;
         if(pageSize==null) pageSize=10;
@@ -149,8 +149,6 @@ public class BoardController {
             m.addAttribute("startOfToday", startOfToday.toEpochMilli());
 
 
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -160,12 +158,12 @@ public class BoardController {
         String userId = (String)session.getAttribute("id");
         System.out.println("userId = " + userId);
         m.addAttribute("userid",userId);
-        return "boardList"; // 로그인을 한 상태이면, 게시판 화면으로 이동
+        return "boardList";
     }
 
     private boolean loginCheck(HttpServletRequest request) {
-
-        HttpSession session = request.getSession(false);
-        return session == null;
+        System.out.println(" login check ");
+        HttpSession session = request.getSession();
+        return session.getAttribute("id")==null;
     }
 }

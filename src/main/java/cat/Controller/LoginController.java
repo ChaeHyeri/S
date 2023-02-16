@@ -17,13 +17,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Controller
+/* loginId 가 세션에 저장됨 */
+@SessionAttributes({"loginId"})
 public class LoginController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/loginpage")
+    @GetMapping("/login")
     public String loginpage() {
         return "loginpage";
+
     }
 
     @GetMapping("/logout")
@@ -33,7 +36,7 @@ public class LoginController {
 
     }
 
-    @PostMapping("/loginpage/login")
+    @PostMapping("/login")
     public String login(String id, String pwd, String toURL, boolean rememberId, Model m,
                         HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -43,7 +46,7 @@ public class LoginController {
                 String msg = URLEncoder.encode("id 또는 비밀번호가 일치하지 않습니다.", "utf-8");
                 m.addAttribute("msg",msg);
 
-                return "redirect:/loginpage?msg="+msg;
+                return "redirect:/login?msg="+msg;
             }
 
             // 일치할 경우 세션에 저장

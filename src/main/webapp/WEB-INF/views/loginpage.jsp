@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false"%>
-<c:set var="loginId" value="${pageContext.request.getSession(false)==null ? '' : pageContext.request.session.getAttribute('id')}"/>
 
-<c:set var="loginOutLink" value="${loginId=='' ? '/loginpage' : '/logout'}"/>
-<c:set var="loginOut" value="${loginId=='' ? 'login' : 'logout'}"/>
+<c:set var="loginId" value="${pageContext.request.getSession(false)==null ? '' : pageContext.request.session.getAttribute('id')}"/>
+<c:set var="loginOutLink" value="${not empty loginId=='' ? '/login' : '/logout'}"/>
+<c:set var="loginOut" value="${not empty loginId=='' ? 'login' : 'logout'}"/>
 
 
 <!DOCTYPE html>
@@ -85,7 +85,7 @@
         </nav>
     </header>
 
-<form action="<c:url value="/loginpage/login"/>" method="post" onsubmit="return formCheck(this);">
+<form action="<c:url value="/login"/>" method="post" onsubmit="return formCheck(this);">
     <h3 id="title">login</h3>
     <div id="msg">
         <c:if test="${not empty param.msg}">
