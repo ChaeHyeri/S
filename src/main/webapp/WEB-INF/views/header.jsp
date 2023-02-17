@@ -6,6 +6,9 @@
 <c:set var="loginOutLink" value="${not empty loginId=='' ? '/login' : '/logout'}"/>
 <c:set var="loginOut" value="${not empty loginId=='' ? 'login' : 'logout'}"/>
 
+<c:set var="cart" value="${not empty loginId=='' ? '' : 'cart'}"/>
+<c:set var="cartLink" value="${not empty loginId=='' ? '' : '/cart'}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,9 +96,11 @@
         <nav>
             <ul class="main-nav">
                 <li><a href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
-                <li><a href="<c:url value='/'/>">shop</a></li>
+                <li><a href="<c:url value='/shop'/>">shop</a></li>
                 <li><a href="<c:url value='/board'/>">post</a></li>
                 <li><a href="<c:url value='/me'/>">my</a></li>
+                <li><a href="<c:url value='${cartLink}'/>">${cart}</a></li>
+
             </ul>
         </nav>
         <ul class="main-nav">

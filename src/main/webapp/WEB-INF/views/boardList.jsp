@@ -169,8 +169,8 @@
                     <form action="<c:url value="/board"/>" class="search-form" method="get">
                         <select class="search-option" name="option">
                         <option value="A" ${ph.sc.option=='A' || ph.sc.option=='' ? "selected" : ""}>제목+내용</option>
-                        <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>제목만</option>
-                        <option value="W" ${ph.sc.option=='W' ? "selected" : ""}>작성자</option>
+                        <option value="T" ${ph.sc.option=='T' ? "selected" : ""}>제목</option>
+                        <option value="W" ${ph.sc.option=='W' ? "selected" : ""}>글쓴이</option>
                     </select>
 
                     <input type="text" name="keyword" class="search-input" type="text" value="${ph.sc.keyword}" placeholder="검색어를 입력해주세요">

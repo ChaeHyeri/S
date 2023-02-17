@@ -31,11 +31,11 @@ public class UserController {
         return "myPage";
     }
 
-    @PostMapping("/me/update")
-    public String update(User user) {
-        System.out.println("user = " + user);
+    @PostMapping("/me")
+    public String update(User user) throws Exception {
+        userService.update(user);
 
-        return "myPage";
+        return "main";
     }
 
 

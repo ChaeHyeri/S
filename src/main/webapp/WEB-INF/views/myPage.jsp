@@ -9,10 +9,10 @@
   <title>회원정보 수정</title>
 <body>
 <%@ include file="./header.jsp"%>
-<form action="<c:url value='/me/update'/>" method="post">
+<form action="<c:url value='/me'/>" method="post">
   <div>
     <label for="">아이디</label>
-    <input type="text" name="id" value="${userInfo.id}" readonly/>
+    <input type="text" name="id" value="${userInfo.id}" readonly="readonly"/>
   </div>
   <div>
     <label for="">비밀번호</label>
@@ -24,12 +24,12 @@
   </div>
   <div>
     <label for="">이름</label>
-    <input type="text" name="name" value="${userInfo.name}" readonly/>
+    <input type="text" name="name" value="${userInfo.name}" readonly="readonly"/>
   </div>
   <div>
     <label for="">생년월일</label>
-    <fmt:formatDate value="${userInfo.birth}" pattern="yyyy-MM-dd" var="birth" />
-    <input type="text" name="birth" value="${birth}" readonly/>
+    <fmt:formatDate value="${userInfo.birth}" pattern="yyyy/MM/dd" var="birth" />
+    <input type="text" name="birth" value="${birth}" readonly="readonly"/>
   </div>
   <div>
     <label for="">SNS</label>

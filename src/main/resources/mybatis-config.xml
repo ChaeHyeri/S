@@ -10,5 +10,8 @@
         <typeAlias alias="CommentDTO" type="cat.dto.CommentDTO"/>
         <typeAlias alias="EventDto" type="cat.dto.ReplyEventDto"/>
         <typeAlias alias="NewCommentEvent" type="cat.event.NewCommentEvent"/>
+        <typeAlias alias="ProductDTO" type="cat.dto.ProductDTO"/>
+        <typeAlias alias="CartDTO" type="cat.dto.CartDTO"/>
+
     </typeAliases>
 </configuration>

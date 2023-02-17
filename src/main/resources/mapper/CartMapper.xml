@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cat.dao.CartMapper">
+
+    <insert id="insert" parameterType="CartDTO">
+        INSERT INTO cart
+            (user_id, product_id, quantity)
+        VALUES
+            (#{user_id},#{product_id},#{quantity})
+    </insert>
+
+
+    <select id="myCart" resultMap="cartProductResultMap">
+        SELECT c.cart_id, c.user_id, c.product_id, c.quantity,
+               p.product_id, p.name, p.price, p.stock, p.description
+        FROM cart c
+                 JOIN product p ON c.product_id = p.product_id
+        WHERE c.user_id = #{userId}
+    </select>
+
+    <select id="select" parameterType="CartDTO" resultType="CartDTO">
+        SELECT user_id, product_id, quantity
+        FROM cart
+        WHERE user_id=#{user_id} AND product_id=#{product_id}
+    </select>
+
+    <update id="updateCartQuantity" parameterType="map">
+        UPDATE cart
+        SET quantity=#{quantity}
+        WHERE user_id=#{user_id} AND product_id=#{product_id}
+    </update>
+
+
+    <resultMap type="CartDTO" id="cartProductResultMap">
+        <id property="cart_id" column="cart_id"/>
+        <result property="user_id" column="user_id"/>
+        <result property="product_id" column="product_id"/>
+        <result property="quantity" column="quantity"/>
+
+        <association property="productDTO" javaType="ProductDTO">
+            <id property="product_id" column="product_id"/>
+            <result property="name" column="name"/>
+            <result property="price" column="price"/>
+            <result property="stock" column="stock"/>
+            <result property="description" column="description"/>
+        </association>
+    </resultMap>
+</mapper>

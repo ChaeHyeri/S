@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cat.dao.ProductMapper">
+
+    <select id="selectAll" resultType="ProductDTO">
+        SELECT product_id, name, price, stock, description
+        FROM product
+        ORDER BY product_id DESC
+    </select>
+
+    <select id="selectOne" resultType="ProductDTO">
+        SELECT product_id, name, price, stock, description
+        FROM product
+        WHERE product_id = #{product_id}
+    </select>
+
+
+</mapper>

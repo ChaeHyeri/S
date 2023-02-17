@@ -10,7 +10,6 @@
     </insert>
 
 
-
     <sql id="selectFromUser">
         SELECT id, pwd, name, email, birth, sns, reg_date
         FROM user_info
@@ -21,6 +20,13 @@
         <include refid="selectFromUser"/>
         WHERE id = #{id}
     </select>
+
+    <update id="update" parameterType="User">
+        UPDATE user_info
+        SET   pwd = #{pwd},
+              email = #{email}
+        WHERE id = #{id}
+    </update>
 
 
 </mapper>

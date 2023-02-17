@@ -25,6 +25,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginpage() {
+
         return "loginpage";
 
     }

@@ -32,4 +32,9 @@ public class UserDAOImpl implements UserDAO {
     public int insertUser(User user) throws Exception {
         return session.insert(namespace+"insert", user);
     }
+
+    @Override
+    public int updateUser(User user) throws Exception {
+        return session.update(namespace+"update",user);
+    }
 }
