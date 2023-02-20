@@ -7,5 +7,21 @@
 </head>
 <body>
 
+<table>
+    <tr>
+        <th>상품명</th>
+        <td>${product.name}</td>
+    </tr>
+    <tr>
+        <th>가격</th>
+        <td>${product.price}</td>
+    </tr>
+
+    <tr>
+        <th>수량</th>
+        <td>${product.price}</td>
+    </tr>
+</table>
+
 </body>
 </html>

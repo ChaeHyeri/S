@@ -50,4 +50,7 @@ public class CartService {
         }
     }
 
+    public int deleteFromCart(Integer productId, String id) {
+        return cartDAO.removeProduct(productId, id);
+    }
 }

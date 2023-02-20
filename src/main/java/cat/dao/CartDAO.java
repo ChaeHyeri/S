@@ -43,4 +43,11 @@ public class CartDAO {
         map.put("quantity", newQuantity);
         return session.update(namespace + "updateCartQuantity", map);
     }
+
+    public int removeProduct(Integer productId, String id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("user_id", id);
+        map.put("product_id", productId);
+        return session.delete(namespace+"removeProduct",map);
+    }
 }

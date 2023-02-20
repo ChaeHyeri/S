@@ -33,11 +33,18 @@ public class CartController {
     }
 
     @PostMapping("/cart")
-    public int addCart(@RequestParam Integer productId, @RequestParam Integer quantity, HttpSession session, Model m) throws Exception {
+    public String addCart(@RequestParam Integer productId, @RequestParam Integer quantity, HttpSession session, Model m) throws Exception {
         String id = (String)session.getAttribute("id");
         System.out.println("카트 추가 = " + productId+"번 상품 "+quantity+"개");
+        cartService.addCart(id, productId, quantity);
+        return "redirect:/cart";
+    }
 
-        return cartService.addCart(id,productId,quantity);
+    @PostMapping("/cart/delete")
+    public String removeProduct(@RequestParam Integer productId, @RequestParam String loginId) {
+        System.out.println("장바구니에서 삭제 : " + productId);
+        cartService.deleteFromCart(productId, loginId);
 
+        return "redirect:/cart";
     }
 }

@@ -15,6 +15,8 @@
     </style>
 </head>
 <body>
+<%@ include file="./header.jsp"%>
+
 <h1>장바구니</h1>
 <table>
     <tr>
@@ -35,6 +37,7 @@
             <td>
                 <form action="<c:url value='/cart/delete'/>" method="post">
                     <input type="hidden" name="productId" value="${cartItem.product_id}"/>
+                    <input type="hidden" name="loginId" value="${pageContext.request.session.getAttribute('id')}"/>
                     <input type="submit" value="X"/>
                 </form>
             </td>
@@ -47,5 +50,7 @@
 <form action="<c:url value='/shop'/>" method="get">
     <input type="submit" value="상품목록으로 돌아가기"/>
 </form>
+
+<%@ include file="./footer.jsp"%>
 </body>
 </html>
